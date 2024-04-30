@@ -8,12 +8,12 @@ import 'package:zul_todo_list_app/service/api_service.dart';
 final locator = GetIt.instance;
 
 void init() {
-  // provider
-  locator.registerFactory(
-      () => HomeScreenProvider(client: locator(), apiService: locator()));
-  locator.registerFactory(
-      () => AddTaskScreenProvider(client: locator(), apiService: locator()));
-  locator.registerFactory(() => PageManagerProvider());
+  // // provider
+  // locator.registerFactory(
+  //     () => HomeScreenProvider(client: locator(), apiService: locator()));
+  // locator.registerFactory(
+  //     () => AddTaskScreenProvider(client: locator(), apiService: locator()));
+  // locator.registerFactory(() => PageManagerProvider());
 
   // external
   locator.registerLazySingleton(() => http.Client());
