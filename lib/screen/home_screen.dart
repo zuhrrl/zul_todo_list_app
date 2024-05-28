@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/web.dart';
 import 'package:zul_todo_list_app/bloc/bloc/home_screen_bloc.dart';
 import 'package:zul_todo_list_app/constant/app_color.dart';
-import 'package:zul_todo_list_app/model/task_model.dart';
-import 'package:zul_todo_list_app/provider/home_screen_provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as socketio;
+import 'package:zul_todo_list_app/screen/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const name = 'home-screen';
@@ -15,14 +17,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final locator = GetIt.instance;
+  socketio.Socket? socket;
+  void handleSocketEvent() {
+    socket = locator.get<socketio.Socket>();
+    socket!.on('testmessage',
+        (data) => {Logger().d('message coba dari homescreen $data')});
+  }
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-      () => context.read<HomeScreenBloc>().add(
-            HomeScreenEvent.fetchTask(),
-          ),
-    );
+    Future.microtask(() {
+      handleSocketEvent();
+      context.read<HomeScreenBloc>().add(
+            const HomeScreenEvent.fetchTask(),
+          );
+    });
   }
 
   @override
@@ -32,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
         builder: (context, state) => SafeArea(
           child: state.when(
-            initial: () => Center(
+            initial: () => const Center(
               child: CircularProgressIndicator(),
             ),
-            loading: () => Center(
+            loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
             loaded: (allTask, uncompletedTask, completedTask) =>
@@ -75,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: primaryColor,
                           ),
                           onPressed: () async {
-                            // Navigator.pushNamed(context, AddTaskSceen.name);
+                            Navigator.pushNamed(context, ChatScreen.name);
 
                             // final pageManager =
                             //     context.read<PageManagerProvider>();
@@ -136,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   ListView.builder(
-                    physics: ScrollPhysics(),
+                    physics: const ScrollPhysics(),
                     itemBuilder: (context, index) {
                       var item = allTask[index];
                       return ItemCard(

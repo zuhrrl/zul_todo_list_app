@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/web.dart';
 import 'package:provider/provider.dart';
 import 'package:zul_todo_list_app/bloc/bloc/home_screen_bloc.dart';
-import 'package:zul_todo_list_app/provider/add_task_screen_provider.dart';
-import 'package:zul_todo_list_app/provider/home_screen_provider.dart';
-import 'package:zul_todo_list_app/provider/page_manager_provider.dart';
 import 'package:zul_todo_list_app/screen/add_task_screen.dart';
+import 'package:zul_todo_list_app/screen/chat_screen.dart';
 import 'package:zul_todo_list_app/screen/home_screen.dart';
 import 'package:zul_todo_list_app/injection.dart' as di;
+import 'package:zul_todo_list_app/service/socket_client.dart';
+import 'package:socket_io_client/socket_io_client.dart' as socketio;
+
+final socketio.Socket socket = SocketClient.getSocketClient();
+handleSocketEvent() {
+  socket.on('testmessage', (data) => {Logger().d('message $data')});
+}
 
 void main() {
   di.init();
+  SocketClient.initSocket();
   runApp(const MyApp());
 }
 
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(
-          create: (context) => HomeScreenBloc(),
+          create: (context) => di.locator<HomeScreenBloc>(),
         )
       ],
       child: MaterialApp(
@@ -42,6 +49,10 @@ class MyApp extends StatelessWidget {
               case AddTaskSceen.name:
                 return MaterialPageRoute(
                   builder: (context) => const AddTaskSceen(),
+                );
+              case ChatScreen.name:
+                return MaterialPageRoute(
+                  builder: (context) => const ChatScreen(),
                 );
               default:
                 return MaterialPageRoute(builder: (_) {
