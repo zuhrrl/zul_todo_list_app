@@ -6,23 +6,32 @@ import 'package:logger/web.dart';
 import 'package:zul_todo_list_app/bloc/bloc/home_screen_bloc.dart';
 import 'package:zul_todo_list_app/constant/app_color.dart';
 import 'package:socket_io_client/socket_io_client.dart' as socketio;
+import 'package:zul_todo_list_app/model/socket_model.dart';
 import 'package:zul_todo_list_app/screen/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const name = 'home-screen';
-  const HomeScreen({super.key});
+  final socketio.Socket? socket;
+
+  const HomeScreen({super.key, required this.socket});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final locator = GetIt.instance;
-  socketio.Socket? socket;
   void handleSocketEvent() {
-    socket = locator.get<socketio.Socket>();
-    socket!.on('testmessage',
-        (data) => {Logger().d('message coba dari homescreen $data')});
+    widget.socket!.on(
+      'general',
+      (data) {
+        Logger().d(data);
+        context.read<HomeScreenBloc>().add(
+              HomeScreenEvent.handleSocketEvent(
+                data: SocketModel.fromJson(data),
+              ),
+            );
+      },
+    );
   }
 
   @override
@@ -49,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
-            loaded: (allTask, uncompletedTask, completedTask) =>
+            loaded: (allTask, uncompletedTask, completedTask, socketData) =>
                 SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,6 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(
                     height: 15,
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(15),
+                    child: Text("Response from socket: ${socketData?.message}"),
                   ),
                   SizedBox(
                     height: 35,

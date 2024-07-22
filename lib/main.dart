@@ -38,12 +38,16 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const HomeScreen(),
+          home: HomeScreen(
+            socket: di.locator(),
+          ),
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case HomeScreen.name:
                 return MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => HomeScreen(
+                    socket: di.locator(),
+                  ),
                 );
 
               case AddTaskSceen.name:
@@ -52,7 +56,9 @@ class MyApp extends StatelessWidget {
                 );
               case ChatScreen.name:
                 return MaterialPageRoute(
-                  builder: (context) => const ChatScreen(),
+                  builder: (context) => ChatScreen(
+                    socket: di.locator(),
+                  ),
                 );
               default:
                 return MaterialPageRoute(builder: (_) {
