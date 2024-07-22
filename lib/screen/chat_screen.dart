@@ -5,19 +5,17 @@ import 'package:socket_io_client/socket_io_client.dart' as socketio;
 
 class ChatScreen extends StatefulWidget {
   static const name = 'chat-screen';
+  final socketio.Socket? socket;
 
-  const ChatScreen({super.key});
+  const ChatScreen({super.key, required this.socket});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final locator = GetIt.instance;
-  socketio.Socket? socket;
   void handleSocketEvent() {
-    socket = locator.get<socketio.Socket>();
-    socket!.on('testmessage',
+    widget.socket!.on('testmessage',
         (data) => {Logger().d('message coba dari chat screen $data')});
   }
 
