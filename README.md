@@ -22,9 +22,10 @@ To post a socket message, you need to connect to Socket.io and then post with th
 
 ```
 {
-    "target": "zuhrrlanam@gmail.com",
-    "channel": "home_screen_event",
-    "message_from": "desktop_app",
-    "message": "meessage dari bang ruhyat"
+  "channel": "general",
+  "message_to": "zuhrrlanam@gmail.com",
+  "message_from": "postman",
+  "message": "your message",
+  "data": int | string | object
 }
 ```

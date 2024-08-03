@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:zul_todo_list_app/model/task.dart' as task;
-import 'package:zul_todo_list_app/model/task_model.dart';
+import 'package:zul_todo_list_app/data/model/task.dart' as task;
+import 'package:zul_todo_list_app/data/model/task_model.dart';
 
 class ApiService {
   static const host = 'https://ranispace.com';

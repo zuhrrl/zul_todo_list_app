@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:zul_todo_list_app/model/task_model.dart';
-import 'package:zul_todo_list_app/provider/add_task_screen_provider.dart';
-import 'package:zul_todo_list_app/provider/page_manager_provider.dart';
-import 'package:zul_todo_list_app/screen/home_screen.dart';
 
 class AddTaskSceen extends StatefulWidget {
   static const name = 'add-task-screen';
@@ -63,26 +58,7 @@ class _AddTaskSceenState extends State<AddTaskSceen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Memproses Data')),
-                      );
-                      Future.microtask(() => Provider.of<AddTaskScreenProvider>(
-                                  context,
-                                  listen: false)
-                              .addTask(
-                                  TaskModel(
-                                      title: titleController.text,
-                                      description: descriptionController.text,
-                                      isDone: false), () {
-                            final pageManager =
-                                context.read<PageManagerProvider>();
-                            pageManager.setAddSuccess(true);
-                            Navigator.pop(context);
-                          }));
-                    }
-                  },
+                  onPressed: () {},
                   child: const Text('Tambah Tugas'),
                 ),
               ),

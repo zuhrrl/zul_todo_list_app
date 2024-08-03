@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:logger/web.dart';
-import 'package:zul_todo_list_app/bloc/bloc/home_screen_bloc.dart';
+import 'package:zul_todo_list_app/presentation/bloc/home_screen/home_screen_bloc.dart';
 import 'package:zul_todo_list_app/constant/app_color.dart';
-import 'package:socket_io_client/socket_io_client.dart' as socketio;
-import 'package:zul_todo_list_app/model/socket_model.dart';
-import 'package:zul_todo_list_app/screen/chat_screen.dart';
+import 'package:zul_todo_list_app/presentation/pages/chat_screen/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const name = 'home-screen';
-  final socketio.Socket? socket;
 
-  const HomeScreen({super.key, required this.socket});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -21,16 +16,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void handleSocketEvent() {
-    widget.socket!.on(
-      'general',
-      (data) {
-        Logger().d(data);
-        context.read<HomeScreenBloc>().add(
-              HomeScreenEvent.handleSocketEvent(
-                data: SocketModel.fromJson(data),
-              ),
-            );
-      },
+    Future.microtask(
+      () => context.read<HomeScreenBloc>().add(
+            const HomeScreenEvent.subscribeEvent(
+              eventName: 'general',
+            ),
+          ),
     );
   }
 
@@ -52,6 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocBuilder<HomeScreenBloc, HomeScreenState>(
         builder: (context, state) => SafeArea(
           child: state.when(
+            subscribeSocketEvent: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
             initial: () => const Center(
               child: CircularProgressIndicator(),
             ),
@@ -117,10 +111,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    margin: EdgeInsets.all(15),
-                    child: Text("Response from socket: ${socketData?.message}"),
-                  ),
+                  if (socketData != null) ...[
+                    Container(
+                      margin: const EdgeInsets.all(15),
+                      child:
+                          Text("Response from socket: ${socketData?.message}"),
+                    ),
+                  ],
                   SizedBox(
                     height: 35,
                     child: Row(

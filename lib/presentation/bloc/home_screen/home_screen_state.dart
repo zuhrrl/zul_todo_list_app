@@ -11,4 +11,5 @@ sealed class HomeScreenState with _$HomeScreenState {
     SocketModel? socketData,
   }) = _Loaded;
   const factory HomeScreenState.error() = _Error;
+  const factory HomeScreenState.subscribeSocketEvent() = _SubscribeSocketEvent;
 }

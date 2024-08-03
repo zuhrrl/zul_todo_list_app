@@ -13,6 +13,7 @@ class SocketClient {
   factory SocketClient() => _socketClient ?? SocketClient._internal();
 
   static void connectToSocket() {
+    Logger().d("Connecting socket:${Constant.socketServer} ");
     _socket = socketio.io(
       Constant.socketServer,
       {
@@ -22,17 +23,16 @@ class SocketClient {
       },
     );
     _socket!.connect();
+    _socket!.onConnect((data) {
+      Logger().d('Socket connected!');
+    });
+    _socket!.onerror((error) {
+      Logger().e('Socket Error: $error');
+    });
   }
 
   static initSocket() {
     connectToSocket();
-    // _socket!.onConnect((message) {
-    //   Logger().d('SOCKET CONNECTED!');
-    // });
-    // _socket!.on('chat_message', (data) {
-    //   var chat = Chat.fromJson(data);
-    //   Logger().d('Receiving message ${chat.text}');
-    // });
   }
 
   static dispose() {

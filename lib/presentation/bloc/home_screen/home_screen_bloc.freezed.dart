@@ -19,18 +19,21 @@ mixin _$HomeScreenEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchTask,
+    required TResult Function(String eventName) subscribeEvent,
     required TResult Function(SocketModel data) handleSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchTask,
+    TResult? Function(String eventName)? subscribeEvent,
     TResult? Function(SocketModel data)? handleSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchTask,
+    TResult Function(String eventName)? subscribeEvent,
     TResult Function(SocketModel data)? handleSocketEvent,
     required TResult orElse(),
   }) =>
@@ -38,18 +41,21 @@ mixin _$HomeScreenEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchTask value) fetchTask,
+    required TResult Function(_ListenSocketEvent value) subscribeEvent,
     required TResult Function(_HandleSocketEvent value) handleSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchTask value)? fetchTask,
+    TResult? Function(_ListenSocketEvent value)? subscribeEvent,
     TResult? Function(_HandleSocketEvent value)? handleSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchTask value)? fetchTask,
+    TResult Function(_ListenSocketEvent value)? subscribeEvent,
     TResult Function(_HandleSocketEvent value)? handleSocketEvent,
     required TResult orElse(),
   }) =>
@@ -119,6 +125,7 @@ class _$FetchTaskImpl with DiagnosticableTreeMixin implements _FetchTask {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchTask,
+    required TResult Function(String eventName) subscribeEvent,
     required TResult Function(SocketModel data) handleSocketEvent,
   }) {
     return fetchTask();
@@ -128,6 +135,7 @@ class _$FetchTaskImpl with DiagnosticableTreeMixin implements _FetchTask {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchTask,
+    TResult? Function(String eventName)? subscribeEvent,
     TResult? Function(SocketModel data)? handleSocketEvent,
   }) {
     return fetchTask?.call();
@@ -137,6 +145,7 @@ class _$FetchTaskImpl with DiagnosticableTreeMixin implements _FetchTask {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchTask,
+    TResult Function(String eventName)? subscribeEvent,
     TResult Function(SocketModel data)? handleSocketEvent,
     required TResult orElse(),
   }) {
@@ -150,6 +159,7 @@ class _$FetchTaskImpl with DiagnosticableTreeMixin implements _FetchTask {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchTask value) fetchTask,
+    required TResult Function(_ListenSocketEvent value) subscribeEvent,
     required TResult Function(_HandleSocketEvent value) handleSocketEvent,
   }) {
     return fetchTask(this);
@@ -159,6 +169,7 @@ class _$FetchTaskImpl with DiagnosticableTreeMixin implements _FetchTask {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchTask value)? fetchTask,
+    TResult? Function(_ListenSocketEvent value)? subscribeEvent,
     TResult? Function(_HandleSocketEvent value)? handleSocketEvent,
   }) {
     return fetchTask?.call(this);
@@ -168,6 +179,7 @@ class _$FetchTaskImpl with DiagnosticableTreeMixin implements _FetchTask {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchTask value)? fetchTask,
+    TResult Function(_ListenSocketEvent value)? subscribeEvent,
     TResult Function(_HandleSocketEvent value)? handleSocketEvent,
     required TResult orElse(),
   }) {
@@ -183,12 +195,166 @@ abstract class _FetchTask implements HomeScreenEvent {
 }
 
 /// @nodoc
+abstract class _$$ListenSocketEventImplCopyWith<$Res> {
+  factory _$$ListenSocketEventImplCopyWith(_$ListenSocketEventImpl value,
+          $Res Function(_$ListenSocketEventImpl) then) =
+      __$$ListenSocketEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String eventName});
+}
+
+/// @nodoc
+class __$$ListenSocketEventImplCopyWithImpl<$Res>
+    extends _$HomeScreenEventCopyWithImpl<$Res, _$ListenSocketEventImpl>
+    implements _$$ListenSocketEventImplCopyWith<$Res> {
+  __$$ListenSocketEventImplCopyWithImpl(_$ListenSocketEventImpl _value,
+      $Res Function(_$ListenSocketEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventName = null,
+  }) {
+    return _then(_$ListenSocketEventImpl(
+      eventName: null == eventName
+          ? _value.eventName
+          : eventName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ListenSocketEventImpl
+    with DiagnosticableTreeMixin
+    implements _ListenSocketEvent {
+  const _$ListenSocketEventImpl({required this.eventName});
+
+  @override
+  final String eventName;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeScreenEvent.subscribeEvent(eventName: $eventName)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeScreenEvent.subscribeEvent'))
+      ..add(DiagnosticsProperty('eventName', eventName));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ListenSocketEventImpl &&
+            (identical(other.eventName, eventName) ||
+                other.eventName == eventName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, eventName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ListenSocketEventImplCopyWith<_$ListenSocketEventImpl> get copyWith =>
+      __$$ListenSocketEventImplCopyWithImpl<_$ListenSocketEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchTask,
+    required TResult Function(String eventName) subscribeEvent,
+    required TResult Function(SocketModel data) handleSocketEvent,
+  }) {
+    return subscribeEvent(eventName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetchTask,
+    TResult? Function(String eventName)? subscribeEvent,
+    TResult? Function(SocketModel data)? handleSocketEvent,
+  }) {
+    return subscribeEvent?.call(eventName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchTask,
+    TResult Function(String eventName)? subscribeEvent,
+    TResult Function(SocketModel data)? handleSocketEvent,
+    required TResult orElse(),
+  }) {
+    if (subscribeEvent != null) {
+      return subscribeEvent(eventName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchTask value) fetchTask,
+    required TResult Function(_ListenSocketEvent value) subscribeEvent,
+    required TResult Function(_HandleSocketEvent value) handleSocketEvent,
+  }) {
+    return subscribeEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchTask value)? fetchTask,
+    TResult? Function(_ListenSocketEvent value)? subscribeEvent,
+    TResult? Function(_HandleSocketEvent value)? handleSocketEvent,
+  }) {
+    return subscribeEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchTask value)? fetchTask,
+    TResult Function(_ListenSocketEvent value)? subscribeEvent,
+    TResult Function(_HandleSocketEvent value)? handleSocketEvent,
+    required TResult orElse(),
+  }) {
+    if (subscribeEvent != null) {
+      return subscribeEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ListenSocketEvent implements HomeScreenEvent {
+  const factory _ListenSocketEvent({required final String eventName}) =
+      _$ListenSocketEventImpl;
+
+  String get eventName;
+  @JsonKey(ignore: true)
+  _$$ListenSocketEventImplCopyWith<_$ListenSocketEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$HandleSocketEventImplCopyWith<$Res> {
   factory _$$HandleSocketEventImplCopyWith(_$HandleSocketEventImpl value,
           $Res Function(_$HandleSocketEventImpl) then) =
       __$$HandleSocketEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SocketModel data});
+
+  $SocketModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -210,6 +376,14 @@ class __$$HandleSocketEventImplCopyWithImpl<$Res>
           : data // ignore: cast_nullable_to_non_nullable
               as SocketModel,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SocketModelCopyWith<$Res> get data {
+    return $SocketModelCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value));
+    });
   }
 }
 
@@ -258,6 +432,7 @@ class _$HandleSocketEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchTask,
+    required TResult Function(String eventName) subscribeEvent,
     required TResult Function(SocketModel data) handleSocketEvent,
   }) {
     return handleSocketEvent(data);
@@ -267,6 +442,7 @@ class _$HandleSocketEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetchTask,
+    TResult? Function(String eventName)? subscribeEvent,
     TResult? Function(SocketModel data)? handleSocketEvent,
   }) {
     return handleSocketEvent?.call(data);
@@ -276,6 +452,7 @@ class _$HandleSocketEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchTask,
+    TResult Function(String eventName)? subscribeEvent,
     TResult Function(SocketModel data)? handleSocketEvent,
     required TResult orElse(),
   }) {
@@ -289,6 +466,7 @@ class _$HandleSocketEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchTask value) fetchTask,
+    required TResult Function(_ListenSocketEvent value) subscribeEvent,
     required TResult Function(_HandleSocketEvent value) handleSocketEvent,
   }) {
     return handleSocketEvent(this);
@@ -298,6 +476,7 @@ class _$HandleSocketEventImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchTask value)? fetchTask,
+    TResult? Function(_ListenSocketEvent value)? subscribeEvent,
     TResult? Function(_HandleSocketEvent value)? handleSocketEvent,
   }) {
     return handleSocketEvent?.call(this);
@@ -307,6 +486,7 @@ class _$HandleSocketEventImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchTask value)? fetchTask,
+    TResult Function(_ListenSocketEvent value)? subscribeEvent,
     TResult Function(_HandleSocketEvent value)? handleSocketEvent,
     required TResult orElse(),
   }) {
@@ -337,6 +517,7 @@ mixin _$HomeScreenState {
             List<Task> completedTask, SocketModel? socketData)
         loaded,
     required TResult Function() error,
+    required TResult Function() subscribeSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -347,6 +528,7 @@ mixin _$HomeScreenState {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult? Function()? error,
+    TResult? Function()? subscribeSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -357,6 +539,7 @@ mixin _$HomeScreenState {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult Function()? error,
+    TResult Function()? subscribeSocketEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -366,6 +549,7 @@ mixin _$HomeScreenState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_SubscribeSocketEvent value) subscribeSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -374,6 +558,7 @@ mixin _$HomeScreenState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -382,6 +567,7 @@ mixin _$HomeScreenState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -455,6 +641,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
             List<Task> completedTask, SocketModel? socketData)
         loaded,
     required TResult Function() error,
+    required TResult Function() subscribeSocketEvent,
   }) {
     return initial();
   }
@@ -468,6 +655,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult? Function()? error,
+    TResult? Function()? subscribeSocketEvent,
   }) {
     return initial?.call();
   }
@@ -481,6 +669,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult Function()? error,
+    TResult Function()? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -496,6 +685,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_SubscribeSocketEvent value) subscribeSocketEvent,
   }) {
     return initial(this);
   }
@@ -507,6 +697,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
   }) {
     return initial?.call(this);
   }
@@ -518,6 +709,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -581,6 +773,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
             List<Task> completedTask, SocketModel? socketData)
         loaded,
     required TResult Function() error,
+    required TResult Function() subscribeSocketEvent,
   }) {
     return loading();
   }
@@ -594,6 +787,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult? Function()? error,
+    TResult? Function()? subscribeSocketEvent,
   }) {
     return loading?.call();
   }
@@ -607,6 +801,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult Function()? error,
+    TResult Function()? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -622,6 +817,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_SubscribeSocketEvent value) subscribeSocketEvent,
   }) {
     return loading(this);
   }
@@ -633,6 +829,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
   }) {
     return loading?.call(this);
   }
@@ -644,6 +841,7 @@ class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -668,6 +866,8 @@ abstract class _$$LoadedImplCopyWith<$Res> {
       List<Task> uncompletedTask,
       List<Task> completedTask,
       SocketModel? socketData});
+
+  $SocketModelCopyWith<$Res>? get socketData;
 }
 
 /// @nodoc
@@ -704,6 +904,18 @@ class __$$LoadedImplCopyWithImpl<$Res>
           : socketData // ignore: cast_nullable_to_non_nullable
               as SocketModel?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SocketModelCopyWith<$Res>? get socketData {
+    if (_value.socketData == null) {
+      return null;
+    }
+
+    return $SocketModelCopyWith<$Res>(_value.socketData!, (value) {
+      return _then(_value.copyWith(socketData: value));
+    });
   }
 }
 
@@ -802,6 +1014,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
             List<Task> completedTask, SocketModel? socketData)
         loaded,
     required TResult Function() error,
+    required TResult Function() subscribeSocketEvent,
   }) {
     return loaded(allTask, uncompletedTask, completedTask, socketData);
   }
@@ -815,6 +1028,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult? Function()? error,
+    TResult? Function()? subscribeSocketEvent,
   }) {
     return loaded?.call(allTask, uncompletedTask, completedTask, socketData);
   }
@@ -828,6 +1042,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult Function()? error,
+    TResult Function()? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -843,6 +1058,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_SubscribeSocketEvent value) subscribeSocketEvent,
   }) {
     return loaded(this);
   }
@@ -854,6 +1070,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
   }) {
     return loaded?.call(this);
   }
@@ -865,6 +1082,7 @@ class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -940,6 +1158,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
             List<Task> completedTask, SocketModel? socketData)
         loaded,
     required TResult Function() error,
+    required TResult Function() subscribeSocketEvent,
   }) {
     return error();
   }
@@ -953,6 +1172,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult? Function()? error,
+    TResult? Function()? subscribeSocketEvent,
   }) {
     return error?.call();
   }
@@ -966,6 +1186,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
             List<Task> completedTask, SocketModel? socketData)?
         loaded,
     TResult Function()? error,
+    TResult Function()? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -981,6 +1202,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_SubscribeSocketEvent value) subscribeSocketEvent,
   }) {
     return error(this);
   }
@@ -992,6 +1214,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
   }) {
     return error?.call(this);
   }
@@ -1003,6 +1226,7 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1014,4 +1238,140 @@ class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
 
 abstract class _Error implements HomeScreenState {
   const factory _Error() = _$ErrorImpl;
+}
+
+/// @nodoc
+abstract class _$$SubscribeSocketEventImplCopyWith<$Res> {
+  factory _$$SubscribeSocketEventImplCopyWith(_$SubscribeSocketEventImpl value,
+          $Res Function(_$SubscribeSocketEventImpl) then) =
+      __$$SubscribeSocketEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SubscribeSocketEventImplCopyWithImpl<$Res>
+    extends _$HomeScreenStateCopyWithImpl<$Res, _$SubscribeSocketEventImpl>
+    implements _$$SubscribeSocketEventImplCopyWith<$Res> {
+  __$$SubscribeSocketEventImplCopyWithImpl(_$SubscribeSocketEventImpl _value,
+      $Res Function(_$SubscribeSocketEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SubscribeSocketEventImpl
+    with DiagnosticableTreeMixin
+    implements _SubscribeSocketEvent {
+  const _$SubscribeSocketEventImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeScreenState.subscribeSocketEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'HomeScreenState.subscribeSocketEvent'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SubscribeSocketEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Task> allTask, List<Task> uncompletedTask,
+            List<Task> completedTask, SocketModel? socketData)
+        loaded,
+    required TResult Function() error,
+    required TResult Function() subscribeSocketEvent,
+  }) {
+    return subscribeSocketEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Task> allTask, List<Task> uncompletedTask,
+            List<Task> completedTask, SocketModel? socketData)?
+        loaded,
+    TResult? Function()? error,
+    TResult? Function()? subscribeSocketEvent,
+  }) {
+    return subscribeSocketEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Task> allTask, List<Task> uncompletedTask,
+            List<Task> completedTask, SocketModel? socketData)?
+        loaded,
+    TResult Function()? error,
+    TResult Function()? subscribeSocketEvent,
+    required TResult orElse(),
+  }) {
+    if (subscribeSocketEvent != null) {
+      return subscribeSocketEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
+    required TResult Function(_SubscribeSocketEvent value) subscribeSocketEvent,
+  }) {
+    return subscribeSocketEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
+  }) {
+    return subscribeSocketEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    TResult Function(_SubscribeSocketEvent value)? subscribeSocketEvent,
+    required TResult orElse(),
+  }) {
+    if (subscribeSocketEvent != null) {
+      return subscribeSocketEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SubscribeSocketEvent implements HomeScreenState {
+  const factory _SubscribeSocketEvent() = _$SubscribeSocketEventImpl;
 }
